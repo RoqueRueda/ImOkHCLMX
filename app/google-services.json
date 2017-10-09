@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1048420341933",
+    "firebase_url": "https://imokhclmx-a6854.firebaseio.com",
+    "project_id": "imokhclmx-a6854",
+    "storage_bucket": "imokhclmx-a6854.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048420341933:android:2f4974690db05885",
+        "android_client_info": {
+          "package_name": "imok.rueda.roque.com.imokhclmx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1048420341933-h09bsn8iodmt1f9o3m8r4p87henhdnkt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "imok.rueda.roque.com.imokhclmx",
+            "certificate_hash": "24c6789d21aa7c5acce96e0fada3e878b2848122"
+          }
+        },
+        {
+          "client_id": "1048420341933-28th73o39pq403dpkirmdj2jfamv271e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuH62v7FU2hYrtkVHS8PUS2g0BGixX_As"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1048420341933-28th73o39pq403dpkirmdj2jfamv271e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
