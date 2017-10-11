@@ -6,6 +6,8 @@ import android.os.Bundle;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import imok.rueda.roque.com.imokhclmx.model.Contact;
+
 public class MainActivity extends AppCompatActivity {
 
   private DatabaseReference mDatabase;
@@ -17,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
 
     mDatabase = FirebaseDatabase.getInstance().getReference();
-    mContactReference = mDatabase.child("contacs");
+    mContactReference = mDatabase.child(Contact.CONTACTS_REFERENCE);
 
     mContactReference.setValue("Hello World");
   }

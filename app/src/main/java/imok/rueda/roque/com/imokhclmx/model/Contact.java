@@ -9,6 +9,8 @@ package imok.rueda.roque.com.imokhclmx.model;
  */
 public class Contact {
 
+  public static final String CONTACTS_REFERENCE = "contacts";
+
   private String mSapId;
   private String mName;
   private String mSeatCode;
