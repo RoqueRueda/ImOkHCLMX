@@ -2,4 +2,7 @@
     <string name="app_name">ImOkHCLMX</string>
     <string name="contact_image">contact_image</string>
     <string name="title">Are you ok?</string>
+    <string name="sap_id">Sap id</string>
+    <string name="name">Name</string>
+    <string name="seat_code">Seat Code</string>
 </resources>

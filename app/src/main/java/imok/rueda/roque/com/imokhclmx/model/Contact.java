@@ -1,5 +1,8 @@
 package imok.rueda.roque.com.imokhclmx.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Contact details of a person in order to know if he or her are ok.
  *
@@ -50,5 +53,26 @@ public class Contact {
 
   public void setOk(boolean ok) {
     mIsOk = ok;
+  }
+
+  public static List<Contact> getSampleContacts() {
+    List<Contact> contactList = new ArrayList<>(5);
+    // create dummy contact list
+    Contact roque = new Contact();
+    roque.setName("Roque Rueda");
+    roque.setSapId("51619344");
+    roque.setSeatCode("3E06");
+    roque.setOk(true);
+
+    contactList.add(roque);
+
+    Contact silvino = new Contact();
+    silvino.setName("Silvino LastName");
+    silvino.setSapId("01010101");
+    silvino.setSeatCode("10E01");
+    silvino.setOk(false);
+    contactList.add(silvino);
+
+    return contactList;
   }
 }
