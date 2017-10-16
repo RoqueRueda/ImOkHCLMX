@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">ImOkHCLMX</string>
     <string name="contact_image">contact_image</string>
-    <string name="title">Are you ok?</string>
+    <string name="title">Are you OK?</string>
     <string name="sap_id">Sap id</string>
     <string name="name">Name</string>
     <string name="seat_code">Seat Code</string>
     <string name="cancel">Cancel</string>
     <string name="register">Register</string>
+    <string name="dialog_cancel_register">You must register in order to enter to the app</string>
+    <string name="dialog_ok">OK</string>
+    <string name="err_msg_sapId_empty">You must provide a sap id</string>
+    <string name="err_msg_name_empty">You must provide a user name</string>
+    <string name="err_msg_seat_code_empty">You must provide a seat code</string>
 </resources>

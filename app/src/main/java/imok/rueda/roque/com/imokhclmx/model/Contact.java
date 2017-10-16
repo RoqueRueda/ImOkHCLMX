@@ -18,6 +18,7 @@ public class Contact {
   private String mName;
   private String mSeatCode;
   private boolean mIsOk;
+  private String mContactKey;
 
   public Contact() {
     // Required by firebase
@@ -74,5 +75,13 @@ public class Contact {
     contactList.add(silvino);
 
     return contactList;
+  }
+
+  public String getContactKey() {
+    return mContactKey;
+  }
+
+  public void setContactKey(String contactKey) {
+    mContactKey = contactKey;
   }
 }
