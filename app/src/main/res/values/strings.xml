@@ -12,4 +12,5 @@
     <string name="err_msg_sapId_empty">You must provide a sap id</string>
     <string name="err_msg_name_empty">You must provide a user name</string>
     <string name="err_msg_seat_code_empty">You must provide a seat code</string>
+    <string name="err_msg_contact_problem">Woops something whent wrong please try again in few moments</string>
 </resources>
