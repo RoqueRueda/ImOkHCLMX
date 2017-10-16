@@ -18,6 +18,7 @@ import android.widget.EditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import imok.rueda.roque.com.imokhclmx.ContactListActivity;
 import imok.rueda.roque.com.imokhclmx.R;
 import imok.rueda.roque.com.imokhclmx.model.Contact;
 import imok.rueda.roque.com.imokhclmx.utils.Constants;
@@ -100,7 +101,8 @@ public class RegisterFragment extends Fragment {
   }
 
   private void navigateToListFragment() {
-    Intent intent = new Intent(getActivity(), )
+    Intent intent = new Intent(getActivity(), ContactListActivity.class);
+    startActivity(intent);
   }
 
   private void storeAlreadyRegisterFlag() {
