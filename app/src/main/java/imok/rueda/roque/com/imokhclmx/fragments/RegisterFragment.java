@@ -24,7 +24,7 @@ import imok.rueda.roque.com.imokhclmx.model.Contact;
 import imok.rueda.roque.com.imokhclmx.utils.Constants;
 
 /**
- * TODO: Class description.
+ * Fragment used to register a new contact.
  *
  * @author roquerueda
  * @version 1.0
@@ -86,10 +86,10 @@ public class RegisterFragment extends Fragment {
         String seatCode = mSeatCode.getText().toString();
 
         if (validateUserInput(sapId, name, seatCode)) {
-          createFirebaseUser(sapId, name, seatCode);
+          String contactKey = createFirebaseUser(sapId, name, seatCode);
 
           // Indicate that the user is already register
-          storeAlreadyRegisterFlag();
+          storeAlreadyRegisterFlag(contactKey);
 
           // Navigate to the users list
           navigateToListFragment();
@@ -105,12 +105,13 @@ public class RegisterFragment extends Fragment {
     startActivity(intent);
   }
 
-  private void storeAlreadyRegisterFlag() {
+  private void storeAlreadyRegisterFlag(String contactKey) {
     SharedPreferences sharedPreferences =
             PreferenceManager.getDefaultSharedPreferences(getActivity());
     SharedPreferences.Editor editor = sharedPreferences.edit();
     if (sharedPreferences.getBoolean(Constants.FIRST_RUN, true)) {
       editor.putBoolean(Constants.FIRST_RUN, false).apply();
+      editor.putString(Constants.CONTACT_KEY, contactKey).apply();
     }
   }
 
@@ -153,7 +154,7 @@ public class RegisterFragment extends Fragment {
     }
   }
 
-  private void createFirebaseUser(String sapId, String name, String seatCode) {
+  private String createFirebaseUser(String sapId, String name, String seatCode) {
     // Create a contact key
     String contactKey = mContactReference.push().getKey();
 
@@ -166,6 +167,8 @@ public class RegisterFragment extends Fragment {
 
     // Set the contact in the reference.
     mContactReference.child(contactKey).setValue(newContact);
+
+    return contactKey;
   }
 
   /**

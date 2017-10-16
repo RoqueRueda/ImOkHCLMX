@@ -11,4 +11,5 @@ public interface Constants {
 
   String FIRST_RUN = "com.roque.rueda.imok.first_run";
 
+  String CONTACT_KEY = "com.roque.rueda.imok.contact_key";
 }
