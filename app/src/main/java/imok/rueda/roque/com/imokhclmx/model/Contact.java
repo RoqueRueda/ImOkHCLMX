@@ -13,6 +13,7 @@ import java.util.List;
 public class Contact {
 
   public static final String CONTACTS_REFERENCE = "contacts";
+  public static final String OK_PROPERTY = "ok";
 
   private String mSapId;
   private String mName;
