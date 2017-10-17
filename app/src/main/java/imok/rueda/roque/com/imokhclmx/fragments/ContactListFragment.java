@@ -4,15 +4,23 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -35,6 +43,7 @@ public class ContactListFragment extends Fragment {
   private List<Contact> mContacts;
 
   private RecyclerView mContactRecyclerView;
+  private FirebaseRecyclerAdapter<Contact, ContactViewHolder> mContactAdapter;
 
 
   @Override
@@ -44,40 +53,125 @@ public class ContactListFragment extends Fragment {
 
     mDatabase = FirebaseDatabase.getInstance().getReference();
     mContactReference = mDatabase.child(Contact.CONTACTS_REFERENCE);
+  }
 
-    mContactReference.addValueEventListener(new ValueEventListener() {
-      @Override
-      public void onDataChange(DataSnapshot dataSnapshot) {
-        for (DataSnapshot contactSnapShoot : dataSnapshot.getChildren()) {
-          Contact contact = contactSnapShoot.getValue(Contact.class);
-          mContacts.add(contact);
-        }
-      }
+  @Override
+  public void onStart() {
+    super.onStart();
+    mContactAdapter.startListening();
+  }
 
-      @Override
-      public void onCancelled(DatabaseError databaseError) {
-        View fragmentContainer = getActivity().findViewById(R.id.fragment_container);
-        Snackbar.make(fragmentContainer, getText(R.string.err_msg_contact_problem),
-                Snackbar.LENGTH_SHORT);
-      }
-    });
+  @Override
+  public void onStop() {
+    super.onStop();
+    mContactAdapter.cleanup();
   }
 
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    View v = inflater.inflate(R.layout.fragment_contact_list, container, false);
+    final View v = inflater.inflate(R.layout.fragment_contact_list, container, false);
     mContactRecyclerView = v.findViewById(R.id.contacts_recycler_view);
+
+    Query query = mContactReference.orderByKey();
+
+    ChildEventListener childEventListener = new ChildEventListener() {
+      @Override
+      public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+      }
+
+      @Override
+      public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+      }
+
+      @Override
+      public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+      }
+
+      @Override
+      public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+      }
+
+      @Override
+      public void onCancelled(DatabaseError databaseError) {
+
+      }
+    };
+    query.addChildEventListener(childEventListener);
+
+    mContactAdapter = new FirebaseRecyclerAdapter<Contact, ContactViewHolder>(
+            Contact.class,
+            R.layout.list_item_contact,
+            ContactViewHolder.class,
+            query) {
+
+      @Override
+      public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_item_contact, parent, false);
+        return new ContactViewHolder(view);
+      }
+
+      @Override
+      protected void populateViewHolder(ContactViewHolder viewHolder, Contact model, int position) {
+        viewHolder.bindViewsWithData(model);
+      }
+    };
+
+    mContactRecyclerView.setAdapter(mContactAdapter);
+    mContactRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
     return v;
   }
 
-  private class ContactHolder extends RecyclerView.ViewHolder {
+  private class ContactViewHolder extends RecyclerView.ViewHolder {
 
+    private ImageView mContactImage;
+    private TextView mName;
+    private TextView mSeatCode;
+    private TextView mSapId;
+    private ImageView mContactStatus;
 
-
-
-    public ContactHolder(View itemView) {
+    ContactViewHolder(View itemView) {
       super(itemView);
+
+      mContactImage = itemView.findViewById(R.id.contact_picture);
+      mName = itemView.findViewById(R.id.contact_name);
+      mSeatCode = itemView.findViewById(R.id.contact_seat_code);
+      mSapId = itemView.findViewById(R.id.contact_sap_id);
+      mContactStatus = itemView.findViewById(R.id.contact_status);
+    }
+
+    void bindViewsWithData(Contact c) {
+      // Get the first letter
+      // Set as contact icon
+      String firstLetter = c.getName().substring(0, 1);
+      ColorGenerator generator = ColorGenerator.MATERIAL;
+      int color = generator.getRandomColor();
+      TextDrawable drawable = TextDrawable.builder()
+              .buildRound(firstLetter, color);
+      mContactImage.setImageDrawable(drawable);
+
+      // Set the name
+      mName.setText(c.getName());
+
+      // Set sap id
+      mSapId.setText(c.getSapId());
+
+      // Set seat code
+      mSeatCode.setText(c.getSeatCode());
+
+      // Set contact status
+      if (c.isOk()) {
+        mContactStatus.setImageResource(R.drawable.ic_ok_black);
+      } else {
+        mContactStatus.setImageResource(R.drawable.ic_warning_red);
+      }
     }
   }
+
 }
