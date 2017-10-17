@@ -75,6 +75,7 @@ public class ContactListFragment extends Fragment {
 
 
 
+
     public ContactHolder(View itemView) {
       super(itemView);
     }
