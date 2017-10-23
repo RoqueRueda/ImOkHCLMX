@@ -69,7 +69,7 @@ public class ContactListFragment extends Fragment {
   @Override
   public void onStop() {
     super.onStop();
-    mContactAdapter.cleanup();
+    //mContactAdapter.cleanup();
   }
 
   @Nullable
@@ -127,6 +127,7 @@ public class ContactListFragment extends Fragment {
     private TextView mSeatCode;
     private TextView mSapId;
     private ImageView mContactStatus;
+    private Contact mContact;
 
     ContactViewHolder(View itemView) {
       super(itemView);
@@ -139,6 +140,7 @@ public class ContactListFragment extends Fragment {
     }
 
     void bindViewsWithData(Contact c) {
+      mContact = c;
       // Get the first letter
       // Set as contact icon
       String firstLetter = c.getName().substring(0, 1);
@@ -163,6 +165,11 @@ public class ContactListFragment extends Fragment {
       } else {
         mContactStatus.setImageResource(R.drawable.ic_warning_red);
       }
+    }
+
+    @Override
+    public String toString() {
+      return "ContactViewHolder: { Contact: "+ mContact +"}";
     }
   }
 
