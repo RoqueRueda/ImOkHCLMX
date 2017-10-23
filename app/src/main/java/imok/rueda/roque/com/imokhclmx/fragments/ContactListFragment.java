@@ -44,7 +44,6 @@ public class ContactListFragment extends Fragment {
 
   private DatabaseReference mDatabase;
   private DatabaseReference mContactReference;
-  private List<Contact> mContacts;
 
   private FloatingActionButton mImOk;
   private RecyclerView mContactRecyclerView;
@@ -54,7 +53,6 @@ public class ContactListFragment extends Fragment {
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    mContacts = new ArrayList<>();
 
     mDatabase = FirebaseDatabase.getInstance().getReference();
     mContactReference = mDatabase.child(Contact.CONTACTS_REFERENCE);
@@ -69,7 +67,6 @@ public class ContactListFragment extends Fragment {
   @Override
   public void onStop() {
     super.onStop();
-    //mContactAdapter.cleanup();
   }
 
   @Nullable
